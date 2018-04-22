@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wang.demo.MainActivity"
+    android:orientation="vertical"
+    android:background="@color/color_1_white">
+
+    <com.wang.demo.TestScale
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--<com.wang.ui.message_composer_layout.MessageComposerView-->
+        <!--android:id="@+id/reminder_composer_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:focusable="true"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/show_normal_picker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Normal Number Picker"-->
+        <!--android:onClick="onClick"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/show_unlimited_number_picker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Unlimited Number Picker"-->
+        <!--android:onClick="onClick"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/show_day_picker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Day Picker"-->
+        <!--android:onClick="onClick"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/show_week_day_picker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Week Day Picker"-->
+        <!--android:onClick="onClick"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/show_am_pm_picker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="AM PM Picker"-->
+        <!--android:onClick="onClick"/>-->
+</LinearLayout>

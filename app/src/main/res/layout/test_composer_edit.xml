@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@color/color_1_white">
+
+    <Button
+        android:id="@+id/show_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show picker"/>
+
+    <Button
+        android:id="@+id/show_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show edit"/>
+
+    <EditText
+        android:id="@+id/reminder_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="test"/>
+</LinearLayout>

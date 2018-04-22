@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WheelPicker">
+        <attr name="fadingEdgeEnabled" format="boolean" />
+        <attr name="max" format="integer" />
+        <attr name="min" format="integer" />
+        <attr name="selectedTextColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="typeface" format="string" />
+        <attr name="wheelItemCount" format="integer" />
+        <attr name="wrapSelectorWheel" format="boolean" />
+        <attr name="internalMinWidth" format="dimension"/>
+        <attr name="internalMaxWidth" format="dimension"/>
+        <attr name="internalMaxHeight" format="dimension"/>
+        <attr name="internalMinHeight" format="dimension"/>
+        <attr name="align">
+            <enum name="LEFT" value="0"/>
+            <enum name="CENTER" value="1"/>
+            <enum name="RIGHT" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>
