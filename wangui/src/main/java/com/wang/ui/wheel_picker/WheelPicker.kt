@@ -35,7 +35,7 @@ class WheelPicker @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
     private val TOP_AND_BOTTOM_FADING_EDGE_STRENGTH = 0.9f
     private val SNAP_SCROLL_DURATION = 300
-    private val SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 8
+    private val SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 4
     private val DEFAULT_ITEM_COUNT = 3;
     private val DEFAULT_TEXT_SIZE = 80
 
@@ -163,10 +163,13 @@ class WheelPicker @JvmOverloads constructor(
         mTextPaint!!.textSize = mTextSize * 1.3f
         if (mAdapter != null) {
             return if (!mAdapter!!.getTextWithMaximumLength().isEmpty()) {
-                mTextPaint!!.measureText(mAdapter!!.getTextWithMaximumLength()).toInt()
+                val suggestedWith = mTextPaint!!.measureText(mAdapter!!.getTextWithMaximumLength()).toInt()
+                mTextPaint!!.textSize = mTextSize * 1.0f
+                suggestedWith
             } else {
-                //todo need return MATCH_PARENT here
-                mTextPaint!!.measureText("0000").toInt()
+                val suggestedWith = mTextPaint!!.measureText("0000").toInt()
+                mTextPaint!!.textSize = mTextSize * 1.0f
+                suggestedWith
             }
         }
         val widthForMinIndex = mTextPaint!!.measureText(mMinIndex.toString()).toInt()
@@ -197,11 +200,11 @@ class WheelPicker @JvmOverloads constructor(
             View.MeasureSpec.EXACTLY -> result = size
             View.MeasureSpec.UNSPECIFIED ->
 
-                if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT || paramSize == ViewGroup.LayoutParams
+                result = if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT || paramSize == ViewGroup.LayoutParams
                         .MATCH_PARENT)
-                    result = suggestedSize
+                    suggestedSize
                 else {
-                    result = paramSize
+                    paramSize
                 }
         }
 

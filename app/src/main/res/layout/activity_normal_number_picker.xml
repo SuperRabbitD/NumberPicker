@@ -12,7 +12,13 @@
         android:layout_height="400dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        app:align="CENTER" />
-
+        app:align="CENTER"
+        android:layout_centerInParent="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:min="0"
+        app:max="10"/>
 
 </android.support.constraint.ConstraintLayout>
