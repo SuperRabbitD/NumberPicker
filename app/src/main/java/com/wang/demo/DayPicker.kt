@@ -2,7 +2,7 @@ package com.wang.demo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.wang.ui.wheel_picker.WheelPicker
+import com.wang.ui.wheelPicker.WheelPicker
 import com.wang.demo.wheel_picker_adapters.WPDayPickerAdapter
 
 class DayPicker : AppCompatActivity() {

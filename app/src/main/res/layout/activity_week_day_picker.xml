@@ -7,7 +7,7 @@
     tools:context="com.wang.demo.WeekDayPicker"
     >
 
-    <com.wang.ui.wheel_picker.WheelPicker
+    <com.wang.ui.wheelPicker.WheelPicker
         android:id="@+id/testPicker"
         android:layout_width="wrap_content"
         android:layout_height="400dp"

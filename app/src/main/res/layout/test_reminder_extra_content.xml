@@ -6,7 +6,7 @@
     android:layout_height="200dp"
     android:background="@color/color_1_white">
 
-    <com.wang.ui.wheel_picker.WheelPicker
+    <com.wang.ui.wheelPicker.WheelPicker
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:max="10"

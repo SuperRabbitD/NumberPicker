@@ -1,4 +1,4 @@
-package com.wang.ui.message_composer_layout
+package com.wang.ui.messageComposerLayout
 
 import android.app.Activity
 import android.content.Context

@@ -1,10 +1,9 @@
-package com.wang.ui.wheel_picker
+package com.wang.ui.wheelPicker
 
 import android.view.*
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Rect
 import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet

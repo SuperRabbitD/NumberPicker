@@ -1,6 +1,6 @@
 package com.wang.demo.wheel_picker_adapters
 
-import com.wang.ui.wheel_picker.WheelAdapter
+import com.wang.ui.wheelPicker.WheelAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 

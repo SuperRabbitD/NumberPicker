@@ -1,9 +1,8 @@
-package com.wang.ui.message_composer_layout
+package com.wang.ui.messageComposerLayout
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.RelativeLayout
-import android.view.View
 
 
 /**

@@ -1,6 +1,6 @@
 package com.wang.demo.wheel_picker_adapters
 
-import com.wang.ui.wheel_picker.WheelAdapter
+import com.wang.ui.wheelPicker.WheelAdapter
 
 /**
  * Created by wanglu on 3/28/18.

@@ -1,11 +1,10 @@
 package com.wang.demo.reminder_composer;
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
 import com.wang.demo.R;
-import com.wang.ui.message_composer_layout.AccessoryView;
+import com.wang.ui.messageComposerLayout.AccessoryView;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

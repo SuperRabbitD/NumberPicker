@@ -1,4 +1,4 @@
-package com.wang.ui.wheel_picker
+package com.wang.ui.wheelPicker
 
 /**
  * Created by wanglu on 3/28/18.

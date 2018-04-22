@@ -1,5 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'daidai513260'//bintray.com用户名
+    groupId = 'com.demo.wang.ui'//jcenter上的路径
+    artifactId = 'photopicker'
+    publishVersion = '1.0.0'
+    desc = 'this is for test'
+}
 
 android {
     compileSdkVersion 26

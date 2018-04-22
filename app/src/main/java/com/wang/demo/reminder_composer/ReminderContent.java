@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
 import com.wang.demo.R;
-import com.wang.ui.message_composer_layout.ContentView;
+import com.wang.ui.messageComposerLayout.ContentView;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.wang.demo.R;
-import com.wang.ui.message_composer_layout.ComposerBody;
+import com.wang.ui.messageComposerLayout.ComposerBody;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

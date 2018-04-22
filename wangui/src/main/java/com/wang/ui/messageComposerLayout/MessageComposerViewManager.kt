@@ -1,4 +1,4 @@
-package com.wang.ui.message_composer_layout
+package com.wang.ui.messageComposerLayout
 
 import android.animation.Animator
 import android.animation.ValueAnimator
@@ -8,7 +8,6 @@ import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Build
 import android.util.DisplayMetrics
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT

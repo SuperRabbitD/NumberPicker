@@ -5,13 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.wang.demo.reminder_composer.ReminderComposerEdit;
-import com.wang.demo.reminder_composer.ReminderContent;
-import com.wang.demo.reminder_composer.ReminderEditExtraContent;
-import com.wang.demo.reminder_composer.TestEdit;
-import com.wang.ui.message_composer_layout.MessageComposerView;
-import com.wang.ui.message_composer_layout.MessageComposerViewManager;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
