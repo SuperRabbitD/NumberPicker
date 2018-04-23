@@ -1,2 +1,1 @@
-include ':app', ':wangui'
-include ':wangui'
+include ':demo', ':wheel_picker'
