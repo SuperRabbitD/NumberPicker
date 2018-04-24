@@ -34,7 +34,7 @@ numberPicker.setMax(1000)
 numberPicker.setSelectedTextColor(R.color.color_4_blue)
 // Set unselected text color
 numberPicker.setUnselectedTextColor(R.color.color_3_dark_blue)
-//Set user defined adapter
+// Set user defined adapter
 numberPicker.setAdapter(WPDayPickerAdapter())
 
 // OnValueChangeListener
