@@ -111,6 +111,8 @@ class WheelPicker @JvmOverloads constructor(
         mTextPaint!!.style = Paint.Style.STROKE
 
         attributesArray.recycle()
+
+        initializeSelectorWheelIndices()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -210,7 +212,6 @@ class WheelPicker @JvmOverloads constructor(
     }
 
     private fun initializeSelectorWheel() {
-        initializeSelectorWheelIndices()
         mItemHeight = getItemHeight()
         mTextHeight = computeTextHeight()
         mTextGapHeight = getGapHeight()
@@ -552,6 +553,19 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
+    private fun getWrappedSelectorIndex(selectorIndex: Int): Int {
+        if (selectorIndex > mMaxIndex) {
+            return mMinIndex + (selectorIndex - mMaxIndex) % (mMaxIndex - mMinIndex + 1) - 1
+        } else if (selectorIndex < mMinIndex) {
+            return mMaxIndex - (mMinIndex - selectorIndex) % (mMaxIndex - mMinIndex + 1) + 1
+        }
+        return selectorIndex
+    }
+
+    private fun notifyChange(previous: Int, current: Int) {
+        mOnValueChangeListener?.onValueChange(this, getValue(previous), getValue(current))
+    }
+
     fun scrollTo(position: Int) {
         if (mCurSelectedItemIndex == position)
             return
@@ -567,9 +581,8 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-
-    private fun notifyChange(previous: Int, current: Int) {
-        mOnValueChangeListener?.onValueChange(this, getValue(previous), getValue(current))
+    fun setOnValueChangeListener(onValueChangeListener: OnValueChangeListener) {
+        mOnValueChangeListener = onValueChangeListener
     }
 
     fun getCurrentItem(): String {
@@ -585,6 +598,10 @@ class WheelPicker @JvmOverloads constructor(
         smoothScrollTo(getPosition(value))
     }
 
+    fun scrollToValue(value: String) {
+        scrollTo(getPosition(value))
+    }
+
     private fun validatePosition(position: Int): Int {
         return if (!mWrapSelectorWheelPreferred) {
             when {
@@ -597,14 +614,6 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-    private fun getWrappedSelectorIndex(selectorIndex: Int): Int {
-        if (selectorIndex > mMaxIndex) {
-            return mMinIndex + (selectorIndex - mMaxIndex) % (mMaxIndex - mMinIndex + 1) - 1
-        } else if (selectorIndex < mMinIndex) {
-            return mMaxIndex - (mMinIndex - selectorIndex) % (mMaxIndex - mMinIndex + 1) + 1
-        }
-        return selectorIndex
-    }
 
     fun setUnselectedTextColor(resourceId: Int) {
         mUnSelectedTextColor = resourceId
@@ -632,7 +641,7 @@ class WheelPicker @JvmOverloads constructor(
         mSelectorVisibleItemCount = mSelectorItemCount - 2
         mWheelVisibleItemMiddleIndex = (mSelectorVisibleItemCount - 1) / 2
         mSelectorItemIndices = ArrayList(mSelectorItemCount)
-        initializeSelectorWheel()
+        reset()
         requestLayout()
     }
 
@@ -649,7 +658,8 @@ class WheelPicker @JvmOverloads constructor(
         mMinIndex = min
     }
 
-    fun reset(){
+    fun reset() {
+        initializeSelectorWheelIndices()
         initializeSelectorWheel()
         requestLayout()
     }

@@ -2,9 +2,11 @@ package com.super_rabbit.demo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.super_rabbit.demo.wheel_picker_adapters.WPDayPickerAdapter
+import com.super_rabbit.wheel_picker.OnValueChangeListener
+import com.super_rabbit.wheel_picker.WheelPicker
 import kotlinx.android.synthetic.main.activity_normal_number_picker.*
-import kotlinx.android.synthetic.main.activity_normal_number_picker.view.*
 
 class NormalNumberPicker : AppCompatActivity() {
     private var mIsRoundedWrapPreferred = false
@@ -14,11 +16,36 @@ class NormalNumberPicker : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_normal_number_picker)
+
+        //Set rounded wrap enable
+        numberPicker.setSelectorRoundedWrapPreferred(true)
+        //Set wheel item count
+        numberPicker.setWheelItemCount(5)
+        //Set wheel max index
+        numberPicker.setMax(1000)
+        //Set wheel min index
+        numberPicker.setMin(-1000)
+        //Set selected text color
+        numberPicker.setSelectedTextColor(R.color.color_4_blue)
+        //Set unselected text color
+        numberPicker.setUnselectedTextColor(R.color.color_3_dark_blue)
+        //Set user defined adapter
+        numberPicker.setAdapter(WPDayPickerAdapter())
+
+        // OnValueChangeListener
+        val context = this
+        numberPicker.setOnValueChangeListener(object : OnValueChangeListener{
+            override fun onValueChange(picker: WheelPicker, oldVal: String, newVal: String) {
+                val out = String.format("Current: %s", newVal)
+                Toast.makeText(context, out, Toast.LENGTH_SHORT).show()
+            }
+        })
+
         set_wrap.setOnClickListener({
             mIsRoundedWrapPreferred = !mIsRoundedWrapPreferred
-            number_picker.setSelectorRoundedWrapPreferred(mIsRoundedWrapPreferred)
+            numberPicker.setSelectorRoundedWrapPreferred(mIsRoundedWrapPreferred)
             set_wrap.text = String.format("Set wrap (current = %s)", mIsRoundedWrapPreferred.toString())
-            number_picker.reset()
+            numberPicker.reset()
         })
 
          set_wheel_item_count.setOnClickListener({
@@ -27,7 +54,7 @@ class NormalNumberPicker : AppCompatActivity() {
              } else {
                  5
              }
-             number_picker.setWheelItemCount(mWheelItemCount)
+             numberPicker.setWheelItemCount(mWheelItemCount)
              set_wheel_item_count.text = String.format("Set wheel item count (current = %s)", mWheelItemCount.toString())
          })
 
@@ -39,20 +66,20 @@ class NormalNumberPicker : AppCompatActivity() {
                 mCurSelectedTextColor = R.color.color_4_blue
                 set_selected_color.text = String.format("set selected color (current = blue)")
             }
-            number_picker.setSelectedTextColor(mCurSelectedTextColor)
+            numberPicker.setSelectedTextColor(mCurSelectedTextColor)
         })
         set_style.setOnClickListener{
             mIsDayPicker = !mIsDayPicker
             if (mIsDayPicker) {
                 set_style.text = "set picker style (current = day picker)"
-                number_picker.setAdapter(WPDayPickerAdapter())
-                number_picker.requestLayout()
+                numberPicker.setAdapter(WPDayPickerAdapter())
+                numberPicker.requestLayout()
             } else {
                 set_style.text = "set picker style (current = normal number picker)"
-                number_picker.setAdapter(null)
-                number_picker.setMax(9)
-                number_picker.setMin(0)
-                number_picker.reset()
+                numberPicker.setAdapter(null)
+                numberPicker.setMax(9)
+                numberPicker.setMin(0)
+                numberPicker.reset()
             }
         }
     }

@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by wanglu on 3/28/18.
+ * Custom wheel picker adapter for implementing a date picker
  */
 class WPDayPickerAdapter : WheelAdapter {
+    //get item value based on item position in wheel
     override fun getValue(position: Int): String {
         if (position == 0)
             return "Today"
@@ -18,27 +19,31 @@ class WPDayPickerAdapter : WheelAdapter {
         if (position == 1)
             return "Tomorrow"
 
-        val curDate = Date(System.currentTimeMillis())// 获取当前时间
+        val curDate = Date(System.currentTimeMillis())
         val rightNow = Calendar.getInstance()
         rightNow.time = curDate;
-        rightNow.add(Calendar.DATE, position);// 日期减1年
+        rightNow.add(Calendar.DATE, position)
 
-        val simpleDateFormat = SimpleDateFormat("MMM d, yyyy")// 输入日期的格式
+        val simpleDateFormat = SimpleDateFormat("MMM d, yyyy")
         return simpleDateFormat.format(rightNow.time)
     }
 
+    //get item position based on item string value
     override fun getPosition(vale: String): Int {
         return 0
     }
 
+    //return a string with the approximate longest text width, for supporting WRAP_CONTENT
     override fun getTextWithMaximumLength(): String {
         return "Mmm 00, 0000"
     }
 
+    //return the maximum index
     override fun getMaxIndex(): Int {
         return Integer.MAX_VALUE
     }
 
+    //return the minimum index
     override fun getMinIndex(): Int {
         return Integer.MIN_VALUE
     }

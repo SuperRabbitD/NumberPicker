@@ -7,7 +7,7 @@
     tools:context="com.super_rabbit.demo.NormalNumberPicker">
 
     <com.super_rabbit.wheel_picker.WheelPicker
-        android:id="@+id/number_picker"
+        android:id="@+id/numberPicker"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
 
     <Button
         android:id="@+id/set_wheel_item_count"
