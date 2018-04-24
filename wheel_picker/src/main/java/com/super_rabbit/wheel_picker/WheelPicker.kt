@@ -610,11 +610,48 @@ class WheelPicker @JvmOverloads constructor(
         mUnSelectedTextColor = resourceId
     }
 
-    fun setAdapter(adapter: WheelAdapter) {
+    fun setAdapter(adapter: WheelAdapter?) {
         mAdapter = adapter
-        mMaxIndex = adapter.getMaxIndex()
+        if (mAdapter == null) {
+            invalidate()
+            return
+        }
+        mMaxIndex = adapter!!.getMaxIndex()
         mMinIndex = adapter.getMinIndex()
         invalidate()
+    }
+
+    fun setSelectorRoundedWrapPreferred(wrap: Boolean) {
+        mWrapSelectorWheelPreferred = wrap
+        requestLayout()
+    }
+
+    fun setWheelItemCount(count: Int) {
+        mSelectorItemCount = count + 2
+        mWheelMiddleItemIndex = (mSelectorItemCount - 1) / 2
+        mSelectorVisibleItemCount = mSelectorItemCount - 2
+        mWheelVisibleItemMiddleIndex = (mSelectorVisibleItemCount - 1) / 2
+        mSelectorItemIndices = ArrayList(mSelectorItemCount)
+        initializeSelectorWheel()
+        requestLayout()
+    }
+
+    fun setSelectedTextColor(colorId: Int) {
+        mSelectedTextColor = ContextCompat.getColor(context, colorId);
+        requestLayout()
+    }
+
+    fun setMax(max: Int) {
+        mMaxIndex = max
+    }
+
+    fun setMin(min: Int) {
+        mMinIndex = min
+    }
+
+    fun reset(){
+        initializeSelectorWheel()
+        requestLayout()
     }
 }
 
