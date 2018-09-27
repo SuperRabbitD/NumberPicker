@@ -108,7 +108,7 @@ class WheelPicker @JvmOverloads constructor(
         mTextPaint!!.isAntiAlias = true
         mTextPaint!!.textSize = mTextSize.toFloat()
         mTextPaint!!.textAlign = Paint.Align.valueOf(mTextAlign)
-        mTextPaint!!.style = Paint.Style.STROKE
+        mTextPaint!!.style = Paint.Style.FILL_AND_STROKE
 
         attributesArray.recycle()
 
@@ -486,7 +486,7 @@ class WheelPicker @JvmOverloads constructor(
             }
             canvas.save()
             canvas.scale(scale, scale, x, y)
-            canvas.drawText(getValue(mSelectorItemIndices[i]), x, y, mTextPaint)
+            canvas.drawText(getValue(mSelectorItemIndices[i]), x, y, mTextPaint!!)
             canvas.restore()
 
             y += itemHeight
