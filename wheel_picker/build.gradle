@@ -6,7 +6,7 @@ publish {
     userOrg = 'superrabbit'//bintray.com用户名
     groupId = 'com.demo.wang.ui'//jcenter上的路径
     artifactId = 'wangui'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'this is for test'
 }
 
@@ -21,7 +21,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
