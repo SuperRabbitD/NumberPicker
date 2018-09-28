@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.super_rabbit.demo.NormalNumberPicker">
+    tools:context="com.super_rabbit.demo.DemoActivity">
 
     <com.super_rabbit.wheel_picker.WheelPicker
         android:id="@+id/numberPicker"
@@ -14,11 +14,11 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         app:align="CENTER"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/set_wrap"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.5"
         app:max="9"
         app:min="0"
         app:wheelItemCount="5" />
@@ -29,36 +29,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Set wrap (current = false)"
+        app:layout_constraintBottom_toTopOf="@+id/set_wheel_item_count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/set_wheel_item_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Set wheel item count (current = 5)"
+        app:layout_constraintBottom_toTopOf="@+id/set_selected_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_selected_color" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/set_selected_color"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="set selected color (current = blue)"
+        app:layout_constraintBottom_toTopOf="@+id/set_style"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_wrap" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/set_style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="set picker style (current = normal number picker)"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_wheel_item_count" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

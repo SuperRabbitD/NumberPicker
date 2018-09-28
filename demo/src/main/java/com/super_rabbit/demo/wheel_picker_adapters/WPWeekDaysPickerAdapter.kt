@@ -35,12 +35,4 @@ class WPWeekDaysPickerAdapter : WheelAdapter {
     override fun getTextWithMaximumLength(): String {
         return "Wednesday"
     }
-
-    override fun getMaxIndex(): Int {
-        return 6
-    }
-
-    override fun getMinIndex(): Int {
-        return 0
-    }
 }

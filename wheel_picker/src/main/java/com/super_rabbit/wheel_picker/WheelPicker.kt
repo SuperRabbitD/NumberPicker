@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
+import java.util.*
 
 /**
  * Created by wanglu on 3/10/18.
@@ -26,6 +27,37 @@ interface OnValueChangeListener {
      * @param newVal The new value.
      */
     fun onValueChange(picker: WheelPicker, oldVal: String, newVal: String)
+}
+
+interface OnScrollListener {
+    /**
+     * Callback invoked while the number picker scroll state has changed.
+     *
+     * @param view The view whose scroll state is being reported.
+     * @param scrollState The current scroll state. One of
+     * [.SCROLL_STATE_IDLE],
+     * [.SCROLL_STATE_TOUCH_SCROLL] or
+     * [.SCROLL_STATE_IDLE].
+     */
+    fun onScrollStateChange(view: WheelPicker, scrollState: Int)
+
+    companion object {
+
+        /**
+         * The view is not scrolling.
+         */
+        val SCROLL_STATE_IDLE = 0
+
+        /**
+         * The user is scrolling using touch, and his finger is still on the screen.
+         */
+        val SCROLL_STATE_TOUCH_SCROLL = 1
+
+        /**
+         * The user had previously been scrolling using touch and performed a fling.
+         */
+        val SCROLL_STATE_FLING = 2
+    }
 }
 
 class WheelPicker @JvmOverloads constructor(
@@ -67,8 +99,13 @@ class WheelPicker @JvmOverloads constructor(
     private var mTextHeight: Int = 0
     private var mPreviousScrollerY: Int = 0
     private var mOnValueChangeListener: OnValueChangeListener? = null
+    private var mOnScrollListener: OnScrollListener? = null
     private var mAdapter: WheelAdapter? = null
     private var mFadingEdgeEnabled = true
+    /**
+     * The current scroll state of the number picker.
+     */
+    private var mScrollState = OnScrollListener.SCROLL_STATE_IDLE
 
     init {
         val attributesArray = context.obtainStyledAttributes(attrs, R.styleable.WheelPicker, defStyleAttr, 0)
@@ -181,7 +218,6 @@ class WheelPicker @JvmOverloads constructor(
             widthForMaxIndex
     }
 
-
     private fun calculateSize(suggestedSize: Int, paramSize: Int, measureSpec: Int): Int {
         var result = 0
         val size = View.MeasureSpec.getSize(measureSpec)
@@ -201,7 +237,7 @@ class WheelPicker @JvmOverloads constructor(
             View.MeasureSpec.UNSPECIFIED ->
 
                 result = if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT || paramSize == ViewGroup.LayoutParams
-                        .MATCH_PARENT)
+                                .MATCH_PARENT)
                     suggestedSize
                 else {
                     paramSize
@@ -282,7 +318,7 @@ class WheelPicker @JvmOverloads constructor(
                     } else {
                         deltaY += mTouchSlop
                     }
-
+                    onScrollStateChange(OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
                     mIsDragging = true
                 }
 
@@ -305,9 +341,7 @@ class WheelPicker @JvmOverloads constructor(
                         mOverScroller?.fling(scrollX, scrollY, 0, velocity, 0, 0, Integer.MIN_VALUE,
                                 Integer.MAX_VALUE, 0, (getItemHeight() * 0.7).toInt())
                         invalidateOnAnimation()
-                    } else {
-                        //align item;
-                        adjustItemVertical()
+                        onScrollStateChange(OnScrollListener.SCROLL_STATE_FLING)
                     }
                     recyclerVelocityTracker()
                 } else {
@@ -319,7 +353,6 @@ class WheelPicker @JvmOverloads constructor(
 
             MotionEvent.ACTION_CANCEL -> {
                 if (mIsDragging) {
-                    adjustItemVertical()
                     mIsDragging = false
                 }
                 recyclerVelocityTracker()
@@ -419,6 +452,8 @@ class WheelPicker @JvmOverloads constructor(
             mOverScroller!!.startScroll(scrollX, scrollY, 0, deltaY, 800)
             invalidateOnAnimation()
         }
+
+        onScrollStateChange(OnScrollListener.SCROLL_STATE_IDLE)
     }
 
     private fun recyclerVelocityTracker() {
@@ -428,6 +463,14 @@ class WheelPicker @JvmOverloads constructor(
 
     override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
         super.onScrollChanged(l, t, oldl, oldt)
+    }
+
+    private fun onScrollStateChange(scrollState: Int) {
+        if (mScrollState == scrollState) {
+            return
+        }
+        mScrollState = scrollState
+        mOnScrollListener?.onScrollStateChange(this, scrollState)
     }
 
     private fun getItemHeight(): Int {
@@ -494,19 +537,6 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-    private fun getValue(position: Int): String {
-        if (mAdapter != null) return mAdapter!!.getValue(position)
-        return if (!mWrapSelectorWheelPreferred) {
-            when {
-                position > mMaxIndex -> ""
-                position < mMinIndex -> ""
-                else -> position.toString()
-            }
-        } else {
-            getWrappedSelectorIndex(position).toString()
-        }
-    }
-
     private fun getPosition(value: String): Int {
         if (mAdapter != null) return mAdapter!!.getPosition(value)
         try {
@@ -566,6 +596,18 @@ class WheelPicker @JvmOverloads constructor(
         mOnValueChangeListener?.onValueChange(this, getValue(previous), getValue(current))
     }
 
+    private fun validatePosition(position: Int): Int {
+        return if (!mWrapSelectorWheelPreferred) {
+            when {
+                position > mMaxIndex -> mMaxIndex
+                position < mMinIndex -> mMinIndex
+                else -> position
+            }
+        } else {
+            getWrappedSelectorIndex(position)
+        }
+    }
+
     fun scrollTo(position: Int) {
         if (mCurSelectedItemIndex == position)
             return
@@ -581,12 +623,12 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-    fun setOnValueChangeListener(onValueChangeListener: OnValueChangeListener) {
+    fun setOnValueChangedListener(onValueChangeListener: OnValueChangeListener) {
         mOnValueChangeListener = onValueChangeListener
     }
 
-    fun getCurrentItem(): String {
-        return getValue(mCurSelectedItemIndex)
+    fun setOnScrollListener(onScrollListener: OnScrollListener) {
+        mOnScrollListener = onScrollListener
     }
 
     fun smoothScrollTo(position: Int) {
@@ -602,39 +644,67 @@ class WheelPicker @JvmOverloads constructor(
         scrollTo(getPosition(value))
     }
 
-    private fun validatePosition(position: Int): Int {
-        return if (!mWrapSelectorWheelPreferred) {
-            when {
-                position > mMaxIndex -> mMaxIndex
-                position < mMinIndex -> mMinIndex
-                else -> position
-            }
-        } else {
-            getWrappedSelectorIndex(position)
-        }
-    }
-
-
     fun setUnselectedTextColor(resourceId: Int) {
         mUnSelectedTextColor = resourceId
     }
 
-    fun setAdapter(adapter: WheelAdapter?) {
+    /**
+     * Set user define adapter
+     *
+     * @adapter user define adapter
+     * @indexRangeBasedOnAdapterSize specific if the picker's min~max range is based on adapter's size
+     */
+    fun setAdapter(adapter: WheelAdapter?, indexRangeBasedOnAdapterSize: Boolean = true) {
         mAdapter = adapter
         if (mAdapter == null) {
             invalidate()
             return
         }
-        mMaxIndex = adapter!!.getMaxIndex()
-        mMinIndex = adapter.getMinIndex()
+
+        if (adapter!!.getSize() != -1 && indexRangeBasedOnAdapterSize) {
+            mMaxIndex = adapter.getSize()
+            mMinIndex = 0
+        }
         invalidate()
     }
 
-    fun setSelectorRoundedWrapPreferred(wrap: Boolean) {
+    /**
+     * Sets whether the selector wheel shown during flinging/scrolling should
+     * wrap around the {@link NumberPicker#getMinValue()} and
+     * {@link NumberPicker#getMaxValue()} values.
+     * <p>
+     * By default if the range (max - min) is more than the number of items shown
+     * on the selector wheel the selector wheel wrapping is enabled.
+     * </p>
+     * <p>
+     * <strong>Note:</strong> If the number of items, i.e. the range (
+     * {@link #getMaxValue()} - {@link #getMinValue()}) is less than
+     * the number of items shown on the selector wheel, the selector wheel will
+     * not wrap. Hence, in such a case calling this method is a NOP.
+     * </p>
+     *
+     * @param wrapSelectorWheel Whether to wrap.
+     */
+    fun setWrapSelectorWheel(wrap: Boolean) {
         mWrapSelectorWheelPreferred = wrap
         requestLayout()
     }
 
+    /**
+     * Gets whether the selector wheel wraps when reaching the min/max value.
+     *
+     * @return True if the selector wheel wraps.
+     *
+     * @see .getMinValue
+     * @see .getMaxValue
+     */
+    fun getWrapSelectorWheel(): Boolean {
+        return mWrapSelectorWheelPreferred
+    }
+
+    /**
+     * Set how many visible item show in the picker
+     */
     fun setWheelItemCount(count: Int) {
         mSelectorItemCount = count + 2
         mWheelMiddleItemIndex = (mSelectorItemCount - 1) / 2
@@ -645,17 +715,53 @@ class WheelPicker @JvmOverloads constructor(
         requestLayout()
     }
 
+    /**
+     * Set color for current selected item
+     */
     fun setSelectedTextColor(colorId: Int) {
         mSelectedTextColor = ContextCompat.getColor(context, colorId);
         requestLayout()
     }
 
-    fun setMax(max: Int) {
+    fun getValue(position: Int): String {
+        if (mAdapter != null) return mAdapter!!.getValue(position)
+        return if (!mWrapSelectorWheelPreferred) {
+            when {
+                position > mMaxIndex -> ""
+                position < mMinIndex -> ""
+                else -> position.toString()
+            }
+        } else {
+            getWrappedSelectorIndex(position).toString()
+        }
+    }
+
+    fun setValue(value: String) {
+        scrollToValue(value)
+    }
+
+    fun setMaxValue(max: Int) {
         mMaxIndex = max
     }
 
-    fun setMin(min: Int) {
+    fun getMaxValue(): String {
+        return if (mAdapter != null) {
+            mAdapter!!.getValue(mMaxIndex)
+        } else {
+            mMaxIndex.toString()
+        }
+    }
+
+    fun setMinValue(min: Int) {
         mMinIndex = min
+    }
+
+    fun getMinValue(): String {
+        return if (mAdapter != null) {
+            mAdapter!!.getValue(mMinIndex)
+        } else {
+            mMinIndex.toString()
+        }
     }
 
     fun reset() {

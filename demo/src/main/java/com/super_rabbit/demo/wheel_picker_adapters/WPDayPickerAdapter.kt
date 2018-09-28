@@ -7,6 +7,7 @@ import java.util.*
 /**
  * Custom wheel picker adapter for implementing a date picker
  */
+val curDate = Date(System.currentTimeMillis())
 class WPDayPickerAdapter : WheelAdapter {
     //get item value based on item position in wheel
     override fun getValue(position: Int): String {
@@ -18,8 +19,6 @@ class WPDayPickerAdapter : WheelAdapter {
 
         if (position == 1)
             return "Tomorrow"
-
-        val curDate = Date(System.currentTimeMillis())
         val rightNow = Calendar.getInstance()
         rightNow.time = curDate;
         rightNow.add(Calendar.DATE, position)
@@ -36,15 +35,5 @@ class WPDayPickerAdapter : WheelAdapter {
     //return a string with the approximate longest text width, for supporting WRAP_CONTENT
     override fun getTextWithMaximumLength(): String {
         return "Mmm 00, 0000"
-    }
-
-    //return the maximum index
-    override fun getMaxIndex(): Int {
-        return Integer.MAX_VALUE
-    }
-
-    //return the minimum index
-    override fun getMinIndex(): Int {
-        return Integer.MIN_VALUE
     }
 }

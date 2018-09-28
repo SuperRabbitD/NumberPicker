@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
 
 publish {
-    userOrg = 'superrabbit'//bintray.com用户名
-    groupId = 'com.demo.wang.ui'//jcenter上的路径
-    artifactId = 'wangui'
+    userOrg = 'superrabbitd'//bintray.com用户名
+    groupId = 'com.super_rabbit.wheel_picker'//jcenter上的路径
+    artifactId = 'NumberPicker'
     publishVersion = '1.0.1'
-    desc = 'this is for test'
+    desc = 'Customized Number Picker'
 }
 
 tasks.withType(Javadoc).all {

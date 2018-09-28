@@ -1,0 +1,79 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@android:color/transparent">
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        app:align="RIGHT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:textSize="18dp"
+        app:wheelItemCount="5"
+        app:wrapSelectorWheel="true" />
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/hour_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/date_picker"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:align="CENTER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/date_picker"
+        app:layout_constraintRight_toLeftOf="@+id/minutes_picker"
+        app:layout_constraintTop_toTopOf="parent"
+        app:max="11"
+        app:min="0"
+        app:textSize="18dp"
+        app:wheelItemCount="5"
+        app:wrapSelectorWheel="true" />
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/minutes_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/hour_picker"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:align="CENTER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/am_pm_picker"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hour_picker"
+        app:layout_constraintTop_toTopOf="parent"
+        app:max="59"
+        app:min="0"
+        app:textSize="18dp"
+        app:wheelItemCount="5"
+        app:wrapSelectorWheel="true" />
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/am_pm_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/minutes_picker"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:align="CENTER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:max="1"
+        app:min="0"
+        app:textSize="18dp"
+        app:wheelItemCount="5"
+        app:wrapSelectorWheel="false" />
+    
+</android.support.constraint.ConstraintLayout>

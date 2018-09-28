@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.super_rabbit.demo.MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,11 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.super_rabbit.demo.NormalNumberPicker" />
-        <activity android:name="com.super_rabbit.demo.UnlimitedNumberPicker" />
-        <activity android:name="com.super_rabbit.demo.WeekDayPicker" />
-        <activity android:name="com.super_rabbit.demo.DayPicker" />
-        <activity android:name="com.super_rabbit.demo.AMPMPicker"/>
+        <activity android:name=".DemoActivity" />
     </application>
 
 </manifest>

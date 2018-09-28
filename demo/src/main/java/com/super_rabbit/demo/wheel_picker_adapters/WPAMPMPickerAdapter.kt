@@ -25,12 +25,4 @@ class WPAMPMPickerAdapter : WheelAdapter {
     override fun getTextWithMaximumLength(): String {
         return "AM"
     }
-
-    override fun getMaxIndex(): Int {
-        return 1
-    }
-
-    override fun getMinIndex(): Int {
-        return 0
-    }
 }
