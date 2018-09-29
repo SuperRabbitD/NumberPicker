@@ -1,5 +1,9 @@
 # WheelPicker
 The project contains a customizable WheelPicker which is more flexible than android native NumberPicker widget. 
+## Gradle
+```groovy
+    compile 'com.super_rabbit.wheel_picker:NumberPicker:1.0.1'
+```
 ## Features
 - Customizable font include text size, typeface, color and alignment.
 - Customizable picker item count, can be odd or even number.
@@ -93,9 +97,9 @@ class WPDayPickerAdapter : WheelAdapter {
 }
 ```
 ## Demos
+![image](https://github.com/SuperRabbitD/WheelPicker/blob/master/gif_demo/demo_date_picker.gif)
 ![image](https://github.com/SuperRabbitD/WheelPicker/blob/master/gif_demo/demo_wrap.gif)
 ![image](https://github.com/SuperRabbitD/WheelPicker/blob/master/gif_demo/demo_change_color.gif)
 ![image](https://github.com/SuperRabbitD/WheelPicker/blob/master/gif_demo/demo_change_item_count.gif)
-![image](https://github.com/SuperRabbitD/WheelPicker/blob/master/gif_demo/demo_date_picker.gif)
 
 
