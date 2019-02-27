@@ -1,13 +1,12 @@
 package com.super_rabbit.demo;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.super_rabbit.demo.demo_fragments.DateAndTimePickerFragment;
 import com.super_rabbit.demo.demo_fragments.UnlimitedNumberPickerDemo;
 import com.super_rabbit.demo.demo_fragments.WeekDayPickerFragment;
@@ -21,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(UnlimitedNumberPickerDemo.newInstance());
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent intent;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.show_style_demo:
                 intent = new Intent(MainActivity.this, DemoActivity.class);
                 startActivity(intent);

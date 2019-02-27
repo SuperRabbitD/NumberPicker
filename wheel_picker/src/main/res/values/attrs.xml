@@ -11,9 +11,9 @@
         <attr name="wheelItemCount" format="integer" />
         <attr name="wrapSelectorWheel" format="boolean" />
         <attr name="align">
-            <enum name="LEFT" value="0"/>
-            <enum name="CENTER" value="1"/>
-            <enum name="RIGHT" value="2"/>
+            <enum name="LEFT" value="0" />
+            <enum name="CENTER" value="1" />
+            <enum name="RIGHT" value="2" />
         </attr>
     </declare-styleable>
 </resources>

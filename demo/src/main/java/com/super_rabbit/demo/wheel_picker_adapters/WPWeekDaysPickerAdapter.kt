@@ -7,7 +7,7 @@ import com.super_rabbit.wheel_picker.WheelAdapter
  */
 class WPWeekDaysPickerAdapter : WheelAdapter {
     override fun getValue(position: Int): String {
-        return when(position) {
+        return when (position) {
             0 -> "Monday"
             1 -> "Tuesday"
             2 -> "Wednesday"
@@ -20,7 +20,7 @@ class WPWeekDaysPickerAdapter : WheelAdapter {
     }
 
     override fun getPosition(vale: String): Int {
-        return when(vale) {
+        return when (vale) {
             "Monday" -> 0
             "Tuesday" -> 1
             "Wednesday" -> 2

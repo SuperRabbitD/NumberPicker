@@ -7,7 +7,7 @@ import com.super_rabbit.wheel_picker.WheelAdapter
  */
 class WPAMPMPickerAdapter : WheelAdapter {
     override fun getValue(position: Int): String {
-        return when(position){
+        return when (position) {
             0 -> "AM"
             1 -> "PM"
             else -> ""
@@ -15,7 +15,7 @@ class WPAMPMPickerAdapter : WheelAdapter {
     }
 
     override fun getPosition(vale: String): Int {
-        return when(vale){
+        return when (vale) {
             "AM" -> 0
             "PM" -> 1
             else -> 0

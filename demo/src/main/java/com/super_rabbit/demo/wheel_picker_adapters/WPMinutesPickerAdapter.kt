@@ -1,4 +1,4 @@
-package com.syw.domore.adapter.reminder_time_picker_adapters
+package com.super_rabbit.demo.wheel_picker_adapters
 
 import com.super_rabbit.wheel_picker.WheelAdapter
 
@@ -8,14 +8,14 @@ import com.super_rabbit.wheel_picker.WheelAdapter
  */
 class WPMinutesPickerAdapter : WheelAdapter {
     override fun getValue(position: Int): String {
-        if(position < 10)
-            return "0" + position.toString()
+        if (position < 10)
+            return "0$position"
 
         return position.toString()
     }
 
     override fun getPosition(vale: String): Int {
-        return when(vale) {
+        return when (vale) {
             "00" -> 0
             "01" -> 1
             "02" -> 2
