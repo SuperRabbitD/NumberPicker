@@ -4,7 +4,7 @@ import com.super_rabbit.demo.demo_fragments.clamp
 import com.super_rabbit.wheel_picker.WheelAdapter
 import java.text.DateFormatSymbols
 
-class MonthAdapter : WheelAdapter {
+class MonthAdapter : WheelAdapter() {
 
     private val months = DateFormatSymbols.getInstance().months
 

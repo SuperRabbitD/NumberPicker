@@ -6,7 +6,7 @@ import com.super_rabbit.wheel_picker.WheelAdapter
 /**
  * Created by wanglu on 3/28/18.
  */
-class WPMinutesPickerAdapter : WheelAdapter {
+class WPMinutesPickerAdapter : WheelAdapter() {
     override fun getValue(position: Int): String {
         if (position < 10)
             return "0$position"

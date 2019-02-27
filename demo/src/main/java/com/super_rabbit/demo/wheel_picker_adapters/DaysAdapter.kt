@@ -3,7 +3,7 @@ package com.super_rabbit.demo.wheel_picker_adapters
 import com.super_rabbit.demo.demo_fragments.clamp
 import com.super_rabbit.wheel_picker.WheelAdapter
 
-class DayAdapter(val days: MutableList<Int> = mutableListOf()) : WheelAdapter {
+class DayAdapter(var days: MutableList<Int> = mutableListOf()) : WheelAdapter() {
 
     init {
         if (days.isEmpty())

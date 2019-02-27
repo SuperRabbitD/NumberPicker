@@ -62,9 +62,10 @@ class BirthdayPickerFragment : androidx.fragment.app.Fragment() {
         val daysInMonth = GregorianCalendar(year.getCurrentItem().toInt(), monthAdapter.getPosition(month.getCurrentItem()), 1)
             .getActualMaximum(Calendar.DAY_OF_MONTH)
 
-        dayAdapter = DayAdapter((1..daysInMonth).toMutableList())
+        dayAdapter.days.clear()
+        dayAdapter.days.addAll((1..daysInMonth).toMutableList())
 
-        day.setAdapter(dayAdapter)
+        dayAdapter.notifyDataSetChanged()
 
         var pos = dayAdapter.getPosition(selectedDay)
         if (pos == -1)
@@ -72,8 +73,7 @@ class BirthdayPickerFragment : androidx.fragment.app.Fragment() {
 
         Log.v(TAG, "scroll to pos=$pos selectedDay=$selectedDay daysInMonth=$daysInMonth dayAdapter=${dayAdapter.getMaxIndex()}")
 
-        day.reset()
-        day.scrollTo(pos)
+        day.setValue(selectedDay)
     }
 
     companion object {

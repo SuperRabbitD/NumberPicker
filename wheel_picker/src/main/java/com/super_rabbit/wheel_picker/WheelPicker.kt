@@ -72,7 +72,10 @@ class WheelPicker @JvmOverloads constructor(
     private var mSelectorItemCount: Int
     private var mSelectorVisibleItemCount: Int
     private var mMinIndex: Int
+        get() = (mAdapter?.getSize()?.minus(1)) ?: field
+
     private var mMaxIndex: Int
+
     private var mWheelMiddleItemIndex: Int
     private var mWheelVisibleItemMiddleIndex: Int
     private var mSelectorItemIndices: ArrayList<Int>
@@ -674,6 +677,8 @@ class WheelPicker @JvmOverloads constructor(
             mMinIndex = 0
         }
         invalidate()
+
+        mAdapter?.picker = this
     }
 
     /**

@@ -5,7 +5,7 @@ import com.super_rabbit.wheel_picker.WheelAdapter
 /**
  * Created by wanglu on 3/28/18.
  */
-class WPWeekDaysPickerAdapter : WheelAdapter {
+class WPWeekDaysPickerAdapter : WheelAdapter() {
     override fun getValue(position: Int): String {
         return when (position) {
             0 -> "Monday"
