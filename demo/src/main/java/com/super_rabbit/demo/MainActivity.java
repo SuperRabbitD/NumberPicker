@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.super_rabbit.demo.demo_fragments.BirthdayPickerFragment;
 import com.super_rabbit.demo.demo_fragments.DateAndTimePickerFragment;
 import com.super_rabbit.demo.demo_fragments.UnlimitedNumberPickerDemo;
 import com.super_rabbit.demo.demo_fragments.WeekDayPickerFragment;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.show_day_picker:
                 replaceFragment(DateAndTimePickerFragment.newInstance());
+                break;
+            case R.id.show_birthday_day_picker:
+                replaceFragment(BirthdayPickerFragment.newInstance());
                 break;
             default:
                 break;

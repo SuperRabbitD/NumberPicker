@@ -670,7 +670,7 @@ class WheelPicker @JvmOverloads constructor(
         }
 
         if (adapter!!.getSize() != -1 && indexRangeBasedOnAdapterSize) {
-            mMaxIndex = adapter.getSize()
+            mMaxIndex = adapter.getSize() - 1
             mMinIndex = 0
         }
         invalidate()
@@ -776,6 +776,10 @@ class WheelPicker @JvmOverloads constructor(
         initializeSelectorWheelIndices()
         initializeSelectorWheel()
         requestLayout()
+    }
+
+    fun getCurrentItem(): String {
+        return getValue(mCurSelectedItemIndex)
     }
 }
 

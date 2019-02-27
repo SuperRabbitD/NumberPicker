@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        app:align="RIGHT"
+        app:fadingEdgeEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/month"
+        app:layout_constraintHeight_percent=".3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:max="31"
+        app:min="1"
+        app:selectedTextColor="@color/blue_color"
+        app:textColor="#A4A4A4"
+        app:textSize="16sp"
+        app:wheelItemCount="7"
+        app:wrapSelectorWheel="true" />
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:align="LEFT"
+        app:fadingEdgeEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/year"
+        app:layout_constraintStart_toEndOf="@id/day"
+        app:layout_constraintTop_toTopOf="@id/day"
+        app:max="12"
+        app:min="1"
+        app:selectedTextColor="@color/blue_color"
+        app:textColor="#A4A4A4"
+        app:textSize="16sp"
+        app:wheelItemCount="7"
+        app:wrapSelectorWheel="true" />
+
+    <com.super_rabbit.wheel_picker.WheelPicker
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        app:align="CENTER"
+        app:fadingEdgeEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/month"
+        app:layout_constraintTop_toTopOf="@id/day"
+        app:max="2019"
+        app:min="1919"
+        app:selectedTextColor="@color/blue_color"
+        app:textColor="#A4A4A4"
+        app:textSize="16sp"
+        app:wheelItemCount="7"
+        app:wrapSelectorWheel="true" />
+
+    <View
+        android:id="@+id/divider_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/picker_divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/day"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <View
+        android:id="@+id/divider_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/picker_divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/day"
+        app:layout_constraintVertical_bias="0.56" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

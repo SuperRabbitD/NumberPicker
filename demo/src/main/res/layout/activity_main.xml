@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     android:background="@color/color_1_white"
     android:orientation="vertical"
     tools:context="com.super_rabbit.demo.MainActivity">
@@ -43,6 +44,15 @@
         android:layout_height="wrap_content"
         android:onClick="onClick"
         android:text="Day Picker"
+        app:layout_constraintBottom_toTopOf="@id/show_birthday_day_picker"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/show_birthday_day_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Birthday Picker"
         app:layout_constraintBottom_toTopOf="@id/show_week_day_picker"
         app:layout_constraintLeft_toLeftOf="parent" />
 
