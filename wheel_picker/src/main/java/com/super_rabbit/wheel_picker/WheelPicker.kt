@@ -63,6 +63,9 @@ interface OnScrollListener {
 class WheelPicker @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
+    val TAG = WheelPicker::class.java.simpleName
+
     private val TOP_AND_BOTTOM_FADING_EDGE_STRENGTH = 0.9f
     private val SNAP_SCROLL_DURATION = 300
     private val SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 4
@@ -72,8 +75,6 @@ class WheelPicker @JvmOverloads constructor(
     private var mSelectorItemCount: Int
     private var mSelectorVisibleItemCount: Int
     private var mMinIndex: Int
-        get() = (mAdapter?.getSize()?.minus(1)) ?: field
-
     private var mMaxIndex: Int
 
     private var mWheelMiddleItemIndex: Int
@@ -548,13 +549,13 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-    private fun getPosition(value: String): Int {
-        if (mAdapter != null) return mAdapter!!.getPosition(value)
-        try {
+    private fun getPosition(value: String): Int = when {
+        mAdapter != null -> mAdapter!!.getPosition(value)
+        else -> try {
             val position = value.toInt()
-            return validatePosition(position)
+            validatePosition(position)
         } catch (e: NumberFormatException) {
-            return 0
+            0
         }
     }
 
@@ -736,9 +737,9 @@ class WheelPicker @JvmOverloads constructor(
         requestLayout()
     }
 
-    fun getValue(position: Int): String {
-        if (mAdapter != null) return mAdapter!!.getValue(position)
-        return if (!mWrapSelectorWheelPreferred) {
+    fun getValue(position: Int): String = when {
+        mAdapter != null -> mAdapter!!.getValue(position)
+        else -> if (!mWrapSelectorWheelPreferred) {
             when {
                 position > mMaxIndex -> ""
                 position < mMinIndex -> ""
@@ -789,3 +790,7 @@ class WheelPicker @JvmOverloads constructor(
 }
 
 
+internal fun Int.clamp(min: Int, max: Int): Int {
+    if (this < min) return min
+    return if (this > max) max else this
+}

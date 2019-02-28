@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.super_rabbit.demo.R
-import com.super_rabbit.demo.wheel_picker_adapters.DayAdapter
-import com.super_rabbit.demo.wheel_picker_adapters.MonthAdapter
+import com.super_rabbit.wheel_picker.DayAdapter
+import com.super_rabbit.wheel_picker.MonthAdapter
 import com.super_rabbit.wheel_picker.OnValueChangeListener
 import com.super_rabbit.wheel_picker.WheelPicker
 import kotlinx.android.synthetic.main.fragment_birthday_picker.*
@@ -42,17 +42,20 @@ class BirthdayPickerFragment : androidx.fragment.app.Fragment() {
         month.scrollToValue(monthAdapter.getValue(birthday.month))
         year.scrollToValue(birthday.year.toString())
 
+        Log.v(TAG, "0 = ${monthAdapter.getValue(0)}  11 = ${monthAdapter.getValue(11)} January = ${monthAdapter.getPosition("January")}  December = ${monthAdapter.getPosition("December")} ")
 
         day.onValueChange { _, _, newValue ->
             Log.v(TAG, "day=$newValue")
         }
 
-        month.onValueChange { _, _, _ ->
+        month.onValueChange { _, _, newValue ->
             clampDaysByMonth()
+            Log.v(TAG, "month=$newValue")
         }
 
-        year.onValueChange { _, _, _ ->
+        year.onValueChange { _, _, newValue ->
             clampDaysByMonth()
+            Log.v(TAG, "year=$newValue")
         }
     }
 
@@ -64,14 +67,11 @@ class BirthdayPickerFragment : androidx.fragment.app.Fragment() {
 
         dayAdapter.days.clear()
         dayAdapter.days.addAll((1..daysInMonth).toMutableList())
-
         dayAdapter.notifyDataSetChanged()
 
-        var pos = dayAdapter.getPosition(selectedDay)
-        if (pos == -1)
-            pos = dayAdapter.getMaxIndex()
+        day.setMaxValue(dayAdapter.getMaxIndex())
 
-        Log.v(TAG, "scroll to pos=$pos selectedDay=$selectedDay daysInMonth=$daysInMonth dayAdapter=${dayAdapter.getMaxIndex()}")
+        Log.v(TAG, "scroll to selectedDay=$selectedDay daysInMonth=$daysInMonth dayAdapter=${dayAdapter.getMaxIndex()}")
 
         day.setValue(selectedDay)
     }

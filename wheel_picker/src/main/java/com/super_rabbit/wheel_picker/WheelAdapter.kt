@@ -18,11 +18,12 @@ abstract class WheelAdapter {
     /**
      * get the elements size of the adapter, if the adapter does not contains an element array, default is -1
      */
-    fun getSize(): Int = -1
+    open fun getSize(): Int = -1
 
     var picker: WheelPicker? = null
 
     fun notifyDataSetChanged() {
+        picker?.invalidate()
         picker?.requestLayout()
     }
 }

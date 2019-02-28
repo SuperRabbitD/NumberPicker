@@ -31,7 +31,7 @@
     <com.super_rabbit.wheel_picker.WheelPicker
         android:id="@+id/month"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
@@ -52,7 +52,7 @@
     <com.super_rabbit.wheel_picker.WheelPicker
         android:id="@+id/year"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         app:align="CENTER"
         app:fadingEdgeEnabled="true"

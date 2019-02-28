@@ -1,7 +1,5 @@
-package com.super_rabbit.demo.wheel_picker_adapters
+package com.super_rabbit.wheel_picker
 
-import com.super_rabbit.demo.demo_fragments.clamp
-import com.super_rabbit.wheel_picker.WheelAdapter
 import java.text.DateFormatSymbols
 
 class MonthAdapter : WheelAdapter() {

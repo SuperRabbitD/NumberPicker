@@ -1,7 +1,4 @@
-package com.super_rabbit.demo.wheel_picker_adapters
-
-import com.super_rabbit.demo.demo_fragments.clamp
-import com.super_rabbit.wheel_picker.WheelAdapter
+package com.super_rabbit.wheel_picker
 
 class DayAdapter(var days: MutableList<Int> = mutableListOf()) : WheelAdapter() {
 

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        replaceFragment(UnlimitedNumberPickerDemo.newInstance());
+        replaceFragment(BirthdayPickerFragment.newInstance());
     }
 
     public void onClick(View v) {
