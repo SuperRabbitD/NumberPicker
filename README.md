@@ -33,7 +33,7 @@ numberPicker.setWheelItemCount(5)
 // Set wheel max index
 numberPicker.setMax(1000)
 // Set wheel min index
-numberPicker.setMax(1000)
+numberPicker.setMin(1000)
 // Set selected text color
 numberPicker.setSelectedTextColor(R.color.color_4_blue)
 // Set unselected text color
