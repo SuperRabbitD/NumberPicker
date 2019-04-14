@@ -1,7 +1,7 @@
 package com.super_rabbit.demo
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.super_rabbit.demo.wheel_picker_adapters.WPDayPickerAdapter
 import kotlinx.android.synthetic.main.activity_normal_number_picker.*
 
@@ -38,25 +38,25 @@ class DemoActivity : AppCompatActivity() {
 //            }
 //        })
 
-        set_wrap.setOnClickListener({
+        set_wrap.setOnClickListener {
             mIsRoundedWrapPreferred = !mIsRoundedWrapPreferred
             numberPicker.setWrapSelectorWheel(mIsRoundedWrapPreferred)
             set_wrap.text = String.format("Set wrap (current = %s)", mIsRoundedWrapPreferred.toString())
             numberPicker.reset()
-        })
+        }
 
-         set_wheel_item_count.setOnClickListener({
-             mWheelItemCount = if (mWheelItemCount == 5){
-                 3
-             } else {
-                 5
-             }
-             numberPicker.setWheelItemCount(mWheelItemCount)
-             set_wheel_item_count.text = String.format("Set wheel item count (current = %s)", mWheelItemCount.toString())
-         })
+        set_wheel_item_count.setOnClickListener {
+            mWheelItemCount = if (mWheelItemCount == 5) {
+                3
+            } else {
+                5
+            }
+            numberPicker.setWheelItemCount(mWheelItemCount)
+            set_wheel_item_count.text = String.format("Set wheel item count (current = %s)", mWheelItemCount.toString())
+        }
 
-        set_selected_color.setOnClickListener({
-            if (mCurSelectedTextColor == R.color.color_4_blue){
+        set_selected_color.setOnClickListener {
+            if (mCurSelectedTextColor == R.color.color_4_blue) {
                 mCurSelectedTextColor = R.color.color_7_yellow
                 set_selected_color.text = String.format("set selected color (current = yellow)")
             } else {
@@ -64,8 +64,8 @@ class DemoActivity : AppCompatActivity() {
                 set_selected_color.text = String.format("set selected color (current = blue)")
             }
             numberPicker.setSelectedTextColor(mCurSelectedTextColor)
-        })
-        set_style.setOnClickListener{
+        }
+        set_style.setOnClickListener {
             mIsDayPicker = !mIsDayPicker
             if (mIsDayPicker) {
                 set_style.text = "set picker style (current = day picker)"

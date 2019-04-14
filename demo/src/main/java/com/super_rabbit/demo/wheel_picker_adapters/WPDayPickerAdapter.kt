@@ -8,13 +8,17 @@ import java.util.*
  * Custom wheel picker adapter for implementing a date picker
  */
 val curDate = Date(System.currentTimeMillis())
-class WPDayPickerAdapter : WheelAdapter {
+
+class WPDayPickerAdapter : WheelAdapter() {
+
+    val simpleDateFormat = SimpleDateFormat("MMM d, yyyy")
+
     //get item value based on item position in wheel
     override fun getValue(position: Int): String {
         if (position == 0)
             return "Today"
 
-        if(position == -1)
+        if (position == -1)
             return "Yesterday"
 
         if (position == 1)
@@ -23,7 +27,7 @@ class WPDayPickerAdapter : WheelAdapter {
         rightNow.time = curDate;
         rightNow.add(Calendar.DATE, position)
 
-        val simpleDateFormat = SimpleDateFormat("MMM d, yyyy")
+
         return simpleDateFormat.format(rightNow.time)
     }
 

@@ -1,14 +1,14 @@
 package com.super_rabbit.wheel_picker
 
-import android.view.*
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Build
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.view.*
 import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
+import androidx.core.content.ContextCompat
 import java.util.*
 
 /**
@@ -61,8 +61,11 @@ interface OnScrollListener {
 }
 
 class WheelPicker @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
+    val TAG = WheelPicker::class.java.simpleName
+
     private val TOP_AND_BOTTOM_FADING_EDGE_STRENGTH = 0.9f
     private val SNAP_SCROLL_DURATION = 300
     private val SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 4
@@ -73,6 +76,7 @@ class WheelPicker @JvmOverloads constructor(
     private var mSelectorVisibleItemCount: Int
     private var mMinIndex: Int
     private var mMaxIndex: Int
+
     private var mWheelMiddleItemIndex: Int
     private var mWheelVisibleItemMiddleIndex: Int
     private var mSelectorItemIndices: ArrayList<Int>
@@ -127,10 +131,14 @@ class WheelPicker @JvmOverloads constructor(
         mMaximumVelocity = configuration.scaledMaximumFlingVelocity / SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT
         mMinimumVelocity = configuration.scaledMinimumFlingVelocity
 
-        mSelectedTextColor = attributesArray.getColor(R.styleable.WheelPicker_selectedTextColor
-                , ContextCompat.getColor(context, R.color.color_4_blue));
-        mUnSelectedTextColor = attributesArray.getColor(R.styleable.WheelPicker_textColor
-                , ContextCompat.getColor(context, R.color.color_3_dark_blue));
+        mSelectedTextColor = attributesArray.getColor(
+            R.styleable.WheelPicker_selectedTextColor
+            , ContextCompat.getColor(context, R.color.color_4_blue)
+        );
+        mUnSelectedTextColor = attributesArray.getColor(
+            R.styleable.WheelPicker_textColor
+            , ContextCompat.getColor(context, R.color.color_3_dark_blue)
+        );
         mTextSize = attributesArray.getDimensionPixelSize(R.styleable.WheelPicker_textSize, DEFAULT_TEXT_SIZE);
         val textAlignInt = attributesArray.getInt(R.styleable.WheelPicker_align, 1)
         mTextAlign = when (textAlignInt) {
@@ -237,7 +245,8 @@ class WheelPicker @JvmOverloads constructor(
             View.MeasureSpec.UNSPECIFIED ->
 
                 result = if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT || paramSize == ViewGroup.LayoutParams
-                                .MATCH_PARENT)
+                        .MATCH_PARENT
+                )
                     suggestedSize
                 else {
                     paramSize
@@ -338,8 +347,10 @@ class WheelPicker @JvmOverloads constructor(
 
                     if (Math.abs(velocity!!) > mMinimumVelocity) {
                         mPreviousScrollerY = 0
-                        mOverScroller?.fling(scrollX, scrollY, 0, velocity, 0, 0, Integer.MIN_VALUE,
-                                Integer.MAX_VALUE, 0, (getItemHeight() * 0.7).toInt())
+                        mOverScroller?.fling(
+                            scrollX, scrollY, 0, velocity, 0, 0, Integer.MIN_VALUE,
+                            Integer.MAX_VALUE, 0, (getItemHeight() * 0.7).toInt()
+                        )
                         invalidateOnAnimation()
                         onScrollStateChange(OnScrollListener.SCROLL_STATE_FLING)
                     }
@@ -384,7 +395,8 @@ class WheelPicker @JvmOverloads constructor(
         }
 
         if (!mWrapSelectorWheelPreferred && y < 0
-                && mSelectorItemIndices[mWheelMiddleItemIndex] >= mMaxIndex) {
+            && mSelectorItemIndices[mWheelMiddleItemIndex] >= mMaxIndex
+        ) {
 
             if (mCurrentFirstItemOffset + y - mInitialFirstItemOffset > -(gap / 2))
                 mCurrentFirstItemOffset += y
@@ -537,13 +549,13 @@ class WheelPicker @JvmOverloads constructor(
         }
     }
 
-    private fun getPosition(value: String): Int {
-        if (mAdapter != null) return mAdapter!!.getPosition(value)
-        try {
+    private fun getPosition(value: String): Int = when {
+        mAdapter != null -> mAdapter!!.getPosition(value)
+        else -> try {
             val position = value.toInt()
-            return validatePosition(position)
+            validatePosition(position)
         } catch (e: NumberFormatException) {
-            return 0
+            0
         }
     }
 
@@ -662,10 +674,12 @@ class WheelPicker @JvmOverloads constructor(
         }
 
         if (adapter!!.getSize() != -1 && indexRangeBasedOnAdapterSize) {
-            mMaxIndex = adapter.getSize()
+            mMaxIndex = adapter.getSize() - 1
             mMinIndex = 0
         }
         invalidate()
+
+        mAdapter?.picker = this
     }
 
     /**
@@ -723,9 +737,9 @@ class WheelPicker @JvmOverloads constructor(
         requestLayout()
     }
 
-    fun getValue(position: Int): String {
-        if (mAdapter != null) return mAdapter!!.getValue(position)
-        return if (!mWrapSelectorWheelPreferred) {
+    fun getValue(position: Int): String = when {
+        mAdapter != null -> mAdapter!!.getValue(position)
+        else -> if (!mWrapSelectorWheelPreferred) {
             when {
                 position > mMaxIndex -> ""
                 position < mMinIndex -> ""
@@ -769,6 +783,14 @@ class WheelPicker @JvmOverloads constructor(
         initializeSelectorWheel()
         requestLayout()
     }
+
+    fun getCurrentItem(): String {
+        return getValue(mCurSelectedItemIndex)
+    }
 }
 
 
+internal fun Int.clamp(min: Int, max: Int): Int {
+    if (this < min) return min
+    return if (this > max) max else this
+}
