@@ -46,17 +46,17 @@ interface OnScrollListener {
         /**
          * The view is not scrolling.
          */
-        val SCROLL_STATE_IDLE = 0
+        const val SCROLL_STATE_IDLE = 0
 
         /**
          * The user is scrolling using touch, and his finger is still on the screen.
          */
-        val SCROLL_STATE_TOUCH_SCROLL = 1
+        const val SCROLL_STATE_TOUCH_SCROLL = 1
 
         /**
          * The user had previously been scrolling using touch and performed a fling.
          */
-        val SCROLL_STATE_FLING = 2
+        const val SCROLL_STATE_FLING = 2
     }
 }
 
@@ -64,12 +64,10 @@ class WheelPicker @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    val TAG = WheelPicker::class.java.simpleName
-
     private val TOP_AND_BOTTOM_FADING_EDGE_STRENGTH = 0.9f
     private val SNAP_SCROLL_DURATION = 300
     private val SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 4
-    private val DEFAULT_ITEM_COUNT = 3;
+    private val DEFAULT_ITEM_COUNT = 3
     private val DEFAULT_TEXT_SIZE = 80
 
     private var mSelectorItemCount: Int
@@ -134,12 +132,12 @@ class WheelPicker @JvmOverloads constructor(
         mSelectedTextColor = attributesArray.getColor(
             R.styleable.WheelPicker_selectedTextColor
             , ContextCompat.getColor(context, R.color.color_4_blue)
-        );
+        )
         mUnSelectedTextColor = attributesArray.getColor(
             R.styleable.WheelPicker_textColor
             , ContextCompat.getColor(context, R.color.color_3_dark_blue)
-        );
-        mTextSize = attributesArray.getDimensionPixelSize(R.styleable.WheelPicker_textSize, DEFAULT_TEXT_SIZE);
+        )
+        mTextSize = attributesArray.getDimensionPixelSize(R.styleable.WheelPicker_textSize, DEFAULT_TEXT_SIZE)
         val textAlignInt = attributesArray.getInt(R.styleable.WheelPicker_align, 1)
         mTextAlign = when (textAlignInt) {
             0 -> "LEFT"
@@ -228,11 +226,11 @@ class WheelPicker @JvmOverloads constructor(
 
     private fun calculateSize(suggestedSize: Int, paramSize: Int, measureSpec: Int): Int {
         var result = 0
-        val size = View.MeasureSpec.getSize(measureSpec)
-        val mode = View.MeasureSpec.getMode(measureSpec)
+        val size = MeasureSpec.getSize(measureSpec)
+        val mode = MeasureSpec.getMode(measureSpec)
 
-        when (View.MeasureSpec.getMode(mode)) {
-            View.MeasureSpec.AT_MOST ->
+        when (MeasureSpec.getMode(mode)) {
+            MeasureSpec.AT_MOST ->
 
                 if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT)
                     result = Math.min(suggestedSize, size)
@@ -241,8 +239,8 @@ class WheelPicker @JvmOverloads constructor(
                 else {
                     result = Math.min(paramSize, size)
                 }
-            View.MeasureSpec.EXACTLY -> result = size
-            View.MeasureSpec.UNSPECIFIED ->
+            MeasureSpec.EXACTLY -> result = size
+            MeasureSpec.UNSPECIFIED ->
 
                 result = if (paramSize == ViewGroup.LayoutParams.WRAP_CONTENT || paramSize == ViewGroup.LayoutParams
                         .MATCH_PARENT
@@ -274,8 +272,14 @@ class WheelPicker @JvmOverloads constructor(
 
     private fun initializeSelectorWheelIndices() {
         mSelectorItemIndices.clear()
+        mCurSelectedItemIndex = if (mMinIndex <= 0) {
+            0
+        } else {
+            mMinIndex
+        }
+
         for (i in 0 until mSelectorItemCount) {
-            var selectorIndex = i - mWheelMiddleItemIndex
+            var selectorIndex = mCurSelectedItemIndex + (i - mWheelMiddleItemIndex)
             if (mWrapSelectorWheelPreferred) {
                 selectorIndex = getWrappedSelectorIndex(selectorIndex)
             }
@@ -339,7 +343,7 @@ class WheelPicker @JvmOverloads constructor(
             }
             MotionEvent.ACTION_UP -> {
                 if (mIsDragging) {
-                    mIsDragging = false;
+                    mIsDragging = false
                     parent?.requestDisallowInterceptTouchEvent(false)
 
                     mVelocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
@@ -522,7 +526,7 @@ class WheelPicker @JvmOverloads constructor(
 
         var i = 0
 
-        val topIndexDiffToMid = mWheelVisibleItemMiddleIndex;
+        val topIndexDiffToMid = mWheelVisibleItemMiddleIndex
         val bottomIndexDiffToMid = mSelectorVisibleItemCount - mWheelVisibleItemMiddleIndex - 1
         val maxIndexDiffToMid = Math.max(topIndexDiffToMid, bottomIndexDiffToMid)
 
@@ -633,6 +637,8 @@ class WheelPicker @JvmOverloads constructor(
             }
             mSelectorItemIndices.add(selectorIndex)
         }
+
+        invalidate()
     }
 
     fun setOnValueChangedListener(onValueChangeListener: OnValueChangeListener) {
@@ -701,7 +707,7 @@ class WheelPicker @JvmOverloads constructor(
      */
     fun setWrapSelectorWheel(wrap: Boolean) {
         mWrapSelectorWheelPreferred = wrap
-        requestLayout()
+        invalidate()
     }
 
     /**
@@ -726,15 +732,15 @@ class WheelPicker @JvmOverloads constructor(
         mWheelVisibleItemMiddleIndex = (mSelectorVisibleItemCount - 1) / 2
         mSelectorItemIndices = ArrayList(mSelectorItemCount)
         reset()
-        requestLayout()
+        invalidate()
     }
 
     /**
      * Set color for current selected item
      */
     fun setSelectedTextColor(colorId: Int) {
-        mSelectedTextColor = ContextCompat.getColor(context, colorId);
-        requestLayout()
+        mSelectedTextColor = ContextCompat.getColor(context, colorId)
+        invalidate()
     }
 
     fun getValue(position: Int): String = when {
@@ -781,7 +787,7 @@ class WheelPicker @JvmOverloads constructor(
     fun reset() {
         initializeSelectorWheelIndices()
         initializeSelectorWheel()
-        requestLayout()
+        invalidate()
     }
 
     fun getCurrentItem(): String {
