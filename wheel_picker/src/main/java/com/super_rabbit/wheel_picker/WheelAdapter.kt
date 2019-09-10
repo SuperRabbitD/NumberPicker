@@ -20,10 +20,18 @@ abstract class WheelAdapter {
      */
     open fun getSize(): Int = -1
 
+    open fun getMinValidIndex() : Int? {
+        return null
+    }
+
+    open fun getMaxValidIndex() : Int? {
+        return null
+    }
+
     var picker: WheelPicker? = null
 
     fun notifyDataSetChanged() {
-        picker?.invalidate()
+        picker?.setAdapter(this)
         picker?.requestLayout()
     }
 }

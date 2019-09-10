@@ -11,4 +11,6 @@
     <color name="color_7_yellow">#ffb000</color>
     <color name="default_gray">#f3f3f3</color>
     <color name="chat_bot_bubble_orange">#FDF3D3</color>
+
+    <color name="grey_c2">#C2C2C2</color>
 </resources>
