@@ -1,7 +1,9 @@
 package com.super_rabbit.demo
 
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.super_rabbit.demo.wheel_picker_adapters.WPDayPickerAdapter
 import kotlinx.android.synthetic.main.activity_normal_number_picker.*
 
@@ -10,6 +12,8 @@ class DemoActivity : AppCompatActivity() {
     private var mWheelItemCount = 5
     private var mCurSelectedTextColor = R.color.color_4_blue
     private var mIsDayPicker = false
+    private var currentTypeFace = Typeface.SERIF
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_normal_number_picker)
@@ -78,6 +82,18 @@ class DemoActivity : AppCompatActivity() {
                 numberPicker.setMinValue(0)
                 numberPicker.reset()
             }
+        }
+        set_font.setOnClickListener {
+            currentTypeFace = if(currentTypeFace == Typeface.SERIF) {
+                set_font.text = "set picker typeface (current = aguafina)"
+                ResourcesCompat.getFont(this@DemoActivity, R.font.aguafina_script)
+            } else {
+                set_font.text = "set picker typeface (current = serif)"
+                Typeface.SERIF
+            }
+
+            numberPicker.setTypeface(currentTypeFace)
+            numberPicker.reset()
         }
     }
 }

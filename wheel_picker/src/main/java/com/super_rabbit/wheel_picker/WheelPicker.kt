@@ -3,6 +3,7 @@ package com.super_rabbit.wheel_picker
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
@@ -109,6 +110,7 @@ class WheelPicker @JvmOverloads constructor(
     private var mAdapter: WheelAdapter? = null
     private var mFadingEdgeEnabled = true
     private var mSelectedTextScale = 0.3f
+    private var mTypefaceIndex: Int = 0
     /**
      * The current scroll state of the number picker.
      */
@@ -156,6 +158,7 @@ class WheelPicker @JvmOverloads constructor(
             else -> "CENTER"
         }
         mFadingEdgeEnabled = attributesArray.getBoolean(R.styleable.WheelPicker_fadingEdgeEnabled, true)
+        mTypefaceIndex = attributesArray.getInt(R.styleable.WheelPicker_typeface, 0);
 
         mTextPaint.run {
             isAntiAlias = true
@@ -163,6 +166,12 @@ class WheelPicker @JvmOverloads constructor(
             textSize = mTextSize.toFloat()
             textAlign = Paint.Align.valueOf(mTextAlign)
             style = Paint.Style.FILL_AND_STROKE
+            typeface = when(mTypefaceIndex) { // for the constant values please check the WheelPicker_typeface in the attrs.xml
+                0 -> Typeface.DEFAULT
+                1 -> Typeface.SANS_SERIF
+                2 -> Typeface.SERIF
+                else -> Typeface.DEFAULT
+            }
         }
 
         attributesArray.recycle()
@@ -736,6 +745,15 @@ class WheelPicker @JvmOverloads constructor(
         invalidate()
 
         mAdapter?.picker = this
+    }
+
+    /**
+     * Set a custom typeface object for the text
+     *
+     * @param typeface the custom typeface object
+     */
+    fun setTypeface(typeface: Typeface) {
+        mTextPaint.typeface = typeface
     }
 
     /**
