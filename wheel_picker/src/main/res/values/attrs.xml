@@ -8,7 +8,12 @@
         <attr name="selectedTextScale" format="float" />
         <attr name="textColor" format="color" />
         <attr name="textSize" format="dimension" />
-        <attr name="typeface" format="string" />
+        <attr name="typeface" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="sans" value="1"/>
+            <enum name="serif" value="2"/>
+            <enum name="monospace" value="3"/>
+        </attr>
         <attr name="wheelItemCount" format="integer" />
         <attr name="wrapSelectorWheel" format="boolean" />
         <attr name="minValidIndex" format="integer" />
